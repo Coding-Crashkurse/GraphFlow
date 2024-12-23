@@ -12,7 +12,8 @@ import {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { useState, useEffect, useCallback } from "react";
-import ClassifierNode from "./ClassifierNode"; // Custom Node für "Classifier"
+import ClassifierNode from "./ClassifierNode";
+import DefaultNode from "./DefaultNode";
 
 type CanvasEditorProps = {
   nodes: Node[];
@@ -28,6 +29,7 @@ type CanvasEditorProps = {
 // 1) Mappe Node-Typen => Custom-Komponenten
 const nodeTypes = {
   classifier: ClassifierNode,
+  default: DefaultNode,
 };
 
 export default function CanvasEditor({

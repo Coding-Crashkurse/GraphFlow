@@ -15,7 +15,7 @@ import CanvasEditor from "../components/CanvasEditor";
 export default function ProjectDetailPage() {
   const { projectId } = useParams();
 
-  // 1) Initially keine Nodes/Edges
+  // Initial keine Nodes/Edges
   const initialNodes: Node[] = [];
   const initialEdges: Edge[] = [];
 
@@ -33,12 +33,12 @@ export default function ProjectDetailPage() {
     [setEdges]
   );
 
-  // 2) Node hinzufügen
+  // Node hinzufügen
   const handleAddNode = (nodeType: string) => {
     const nodeId = Math.random().toString(36).substring(2, 9);
 
     let bgColor = "#9ca3af"; // neutrales Grau
-    let nodeReactFlowType: string = "default"; // React Flow node type (default/custom)
+    let nodeReactFlowType: string = "default"; // React Flow node type
 
     switch (nodeType) {
       case "VectorDB":
@@ -54,9 +54,8 @@ export default function ProjectDetailPage() {
         bgColor = "#ef4444"; // rot
         break;
       case "Classifier":
-        // Wir verwenden einen **Custom Node** (siehe CanvasEditor)
-        nodeReactFlowType = "classifier";
-        bgColor = "#10b981"; // z. B. grün
+        nodeReactFlowType = "classifier"; // Custom Node
+        bgColor = "#10b981"; // grün
         break;
       default:
         bgColor = "#6b7280";
@@ -65,11 +64,9 @@ export default function ProjectDetailPage() {
     const newNode: Node = {
       id: nodeId,
       position: { x: 300, y: 200 },
-      // 3) WICHTIG: "type" gibt den Node-Typ für ReactFlow an
       type: nodeReactFlowType,
       data: {
         label: nodeType,
-        // Für Classifier: definieren wir anfänglich "classes"
         classes: "",
       },
       style: {
@@ -81,7 +78,7 @@ export default function ProjectDetailPage() {
     setNodes((prev) => [...prev, newNode]);
   };
 
-  // 4) Entrypoint setzen
+  // Entrypoint setzen
   const handleSetEntrypoint = (nodeId: string) => {
     setEntrypointId(nodeId);
     setNodes((prev) =>
